@@ -1,4 +1,4 @@
-package backpropogation;
+package backpropagation;
 
 import java.util.ArrayList;
 

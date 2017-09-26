@@ -1,8 +1,9 @@
-package backpropogation;
+package backpropagation;
 
-public class BackPropagation {
+public class Main {
 
     public static void main(String[] args) {
 
     }
+
 }

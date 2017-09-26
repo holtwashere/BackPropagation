@@ -1,4 +1,4 @@
-package backpropogation;
+package backpropagation;
 
 public class Neuron {
 
