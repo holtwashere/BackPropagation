@@ -20,7 +20,7 @@ public class Neuron {
         double sum = 0;
 
         // Compute Dot Product of inputs and weights
-        for (int i = 0; i < inputs.length; i++) {
+        for (int i = 0; i < inputs.length - 1; i++) {
             sum += inputs[i] * weights[i];
         }
 

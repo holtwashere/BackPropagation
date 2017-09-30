@@ -9,7 +9,6 @@ public class Network {
 
     private ArrayList<Layer> layers;
 
-
     public Network(double learningRate, double momentum) {
         this.learningRate = learningRate;
         this.momentum = momentum;
@@ -20,13 +19,15 @@ public class Network {
         layers.add(new Layer(weights, biases));
     }
 
-    public double[] process(double inputs[]) {
+    public double[] process(double inputs[][]) {
 
-        double[] outputs = new double[0];
+        double[] outputs = null;
 
-        for (Layer layer: layers) {
-            outputs = layer.process(inputs);
-            inputs = outputs;
+        for (double[] input : inputs) {
+            for (Layer layer: layers) {
+                outputs = layer.process(input);
+                input = outputs;
+            }
         }
 
         return outputs;
