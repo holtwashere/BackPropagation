@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Layer {
 
-    private ArrayList<Neuron> neurons;
-    private int size;
+    public ArrayList<Neuron> neurons;
+    public int size;
 
     public Layer(double weights[][], double biases[]) {
 

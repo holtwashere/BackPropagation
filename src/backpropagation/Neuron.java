@@ -4,13 +4,17 @@ public class Neuron {
 
     private double[] weights; // input weights
     private double bias;
+    private double[] previousWeights;
 
     private double[] inputs;
     private double output;
 
+    public double localGradient;
+
     public Neuron(double[] weights, double bias) {
         this.weights = weights;
         this.bias = bias;
+        this.previousWeights = new double[weights.length];
     }
 
     public double process(double[] inputs) {
@@ -30,6 +34,30 @@ public class Neuron {
 
         return output;
 
+    }
+
+    public void setLocalGradient(double error, double learningRate, double momentum) {
+
+        localGradient = activationPrime() * error;
+
+        for (int i = 0; i < weights.length; i++) {
+
+            double currentWeight = weights[i];
+            double previousWeight = previousWeights[i];
+
+            weights[i] += (momentum * (currentWeight - previousWeight)) + (learningRate * localGradient * inputs[i]);
+            previousWeights[i] = currentWeight;
+
+        }
+
+    }
+
+    public double getLocalGradient() {
+        return localGradient;
+    }
+
+    public double getWeight(int index) {
+        return weights[index];
     }
 
     public double activationPrime() {

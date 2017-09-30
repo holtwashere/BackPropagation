@@ -27,11 +27,17 @@ public class Main {
 
         network.addLayer(weights1, biases1);
         network.addLayer(weights2, biases2);
-        double[] outputs = network.process(crossData);
 
-        for (double output : outputs) {
-            System.out.println(output);
-        }
+        double averageSumOfSquaredErrors = 0;
+        double previousSumOfSquaredErrors = 0;
+        double changeInError = 0;
+
+        do {
+            previousSumOfSquaredErrors = averageSumOfSquaredErrors;
+            averageSumOfSquaredErrors = network.train(crossData);
+            changeInError = Math.abs(previousSumOfSquaredErrors - averageSumOfSquaredErrors);
+            System.out.println(changeInError);
+        } while (changeInError > 0.001);
 
     }
 
