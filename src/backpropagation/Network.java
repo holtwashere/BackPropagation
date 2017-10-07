@@ -9,6 +9,8 @@ public class Network {
 
     private ArrayList<Layer> layers;
 
+    private double averageSumOfSquaredErrors;
+
     public Network(double learningRate, double momentum) {
         this.learningRate = learningRate;
         this.momentum = momentum;
@@ -71,7 +73,7 @@ public class Network {
                     double error = 0;
 
                     for (Neuron nextNeuron : nextLayer.neurons) {
-                        error += (currentNeuron.getLocalGradient() * nextNeuron.getWeight(j));
+                        error += (nextNeuron.getLocalGradient() * nextNeuron.getWeight(j));
                     }
 
                     currentNeuron.setLocalGradient(error, learningRate, momentum);
@@ -83,7 +85,41 @@ public class Network {
         }
 
         // return the average
-        return totalSumOfSquaredErrors / inputs.length;
+        averageSumOfSquaredErrors = totalSumOfSquaredErrors / inputs.length;
+        return averageSumOfSquaredErrors;
+
+    }
+
+    public void printNetwork() {
+
+        int i = 1; // Layers
+        int j = 1; // Neurons
+
+        for (Layer layer : layers) {
+
+            System.out.println("Layer " + i++);
+
+            for (Neuron neuron : layer.neurons) {
+
+                System.out.print("w" + j++ + " ");
+
+                for (double weight : neuron.getWeights()) {
+                    System.out.print(weight + " ");
+                }
+
+                System.out.print("bias " + neuron.getBias());
+                System.out.println();
+
+            }
+
+            j = 1;
+
+            System.out.println();
+
+        }
+
+        System.out.println("Average Sum of Squared Errors " + averageSumOfSquaredErrors);
+        System.out.println();
 
     }
 

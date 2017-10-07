@@ -5,6 +5,7 @@ public class Neuron {
     private double[] weights; // input weights
     private double bias;
     private double[] previousWeights;
+    private double previousBias;
 
     private double[] inputs;
     private double output;
@@ -50,14 +51,28 @@ public class Neuron {
 
         }
 
+        double currentBias = bias;
+        double previousBias = this.previousBias;
+
+        bias += (momentum * (currentBias - previousBias)) + (learningRate * localGradient);
+        this.previousBias = currentBias;
+
     }
 
     public double getLocalGradient() {
         return localGradient;
     }
 
+    public double[] getWeights() {
+        return this.weights;
+    }
+
     public double getWeight(int index) {
         return weights[index];
+    }
+
+    public double getBias() {
+        return bias;
     }
 
     public double activationPrime() {
