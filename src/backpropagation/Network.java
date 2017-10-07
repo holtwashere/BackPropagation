@@ -97,29 +97,25 @@ public class Network {
 
         for (Layer layer : layers) {
 
-            System.out.println("Layer " + i++);
+            System.out.println("\nLayer " + i++);
 
             for (Neuron neuron : layer.neurons) {
 
                 System.out.print("w" + j++ + " ");
 
                 for (double weight : neuron.getWeights()) {
-                    System.out.print(weight + " ");
+                    System.out.printf("%.4f ", weight);
                 }
 
-                System.out.print("bias " + neuron.getBias());
-                System.out.println();
+                System.out.printf("bias: %.4f\n", neuron.getBias());
 
             }
 
             j = 1;
 
-            System.out.println();
-
         }
 
-        System.out.println("Average Sum of Squared Errors " + averageSumOfSquaredErrors);
-        System.out.println();
+        System.out.printf("Average Sum of Squared Errors: %.4f\n\n", averageSumOfSquaredErrors);
 
     }
 
